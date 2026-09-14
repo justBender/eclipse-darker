@@ -1,6 +1,4 @@
 -- Eclipse Darker with Darcula as Basetheme after the RR theme
--- Converted from the Eclipse color theme exported on 2025-09-28.
--- Designed for modern Neovim with Treesitter and LSP semantic highlighting.
 
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") == 1 then
