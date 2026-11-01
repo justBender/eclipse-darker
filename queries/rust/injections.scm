@@ -1,3 +1,29 @@
+; Yew html! macro -> HTML injection
+(macro_invocation
+  macro: [
+    (scoped_identifier
+      name: (identifier) @_macro_name)
+    (identifier) @_macro_name
+  ]
+  (token_tree) @injection.content
+  (#eq? @_macro_name "html")
+  (#set! injection.language "html")
+  (#set! injection.include-children))
+
+; Common markup macros
+(macro_invocation
+  macro: [
+    (scoped_identifier
+      name: (identifier) @_macro_name)
+    (identifier) @_macro_name
+  ]
+  (token_tree) @injection.content
+  (#any-of? @_macro_name "slint" "json" "xml")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "html")
+  (#set! injection.include-children))
+
+; Generic fallback: treat unknown macros as Rust
 (macro_invocation
   macro: [
     (scoped_identifier
@@ -9,17 +35,7 @@
   (#set! injection.language "rust")
   (#set! injection.include-children))
 
-(macro_invocation
-  macro: [
-    (scoped_identifier
-      name: (_) @injection.language)
-    (identifier) @injection.language
-  ]
-  (token_tree) @injection.content
-  (#any-of? @injection.language "slint" "html" "json" "xml")
-  (#offset! @injection.content 0 1 0 -1)
-  (#set! injection.include-children))
-
+; Macro definitions
 (macro_definition
   (macro_rule
     left: (token_tree_pattern) @injection.content
@@ -30,12 +46,14 @@
     right: (token_tree) @injection.content
     (#set! injection.language "rust")))
 
+; Comments
 ([
   (line_comment)
   (block_comment)
 ] @injection.content
   (#set! injection.language "comment"))
 
+; Regex builders
 (call_expression
   function: (scoped_identifier
     path: (identifier) @_regex
@@ -84,6 +102,8 @@
         (string_content) @injection.content)))
   (#set! injection.language "regex"))
 
+; re2c comments
 ((block_comment) @injection.content
   (#match? @injection.content "/\\*!([a-zA-Z]+:)?re2c")
   (#set! injection.language "re2c"))
+
