@@ -1,0 +1,43 @@
+*eclipse-darker.txt*  Eclipse Darker colorscheme
+
+==============================================================================
+eclipse-darker.nvim                                                     *eclipse-darker*
+
+A dark Neovim colorscheme inspired by Eclipse.
+
+INSTALLATION                                              *eclipse-darker-install*
+
+Using lazy.nvim:
+
+>
+{
+  "justBender/eclipse-darker.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    vim.cmd.colorscheme("eclipse-darker")
+  end,
+}
+<
+
+USAGE                                                      *eclipse-darker-usage*
+
+:colorscheme eclipse-darker
+
+OPTIONS                                                   *eclipse-darker-options*
+
+If supported:
+
+>
+require("eclipse-darker").setup({
+  transparent = false,
+})
+<
+
+TROUBLESHOOTING                                    *eclipse-darker-troubleshooting*
+
+If the theme does not appear, make sure:
+- the plugin is installed
+- `:colorscheme eclipse-darker` matches the filename
+- `termguicolors` is enabled
+
