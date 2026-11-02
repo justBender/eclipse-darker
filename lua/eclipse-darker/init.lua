@@ -213,6 +213,24 @@ hl("@tag", { fg = c.find_scope })
 hl("@tag.attribute", { fg = c.annotation_key })
 hl("@tag.delimiter", { fg = c.bracket })
 
+hl("@tag", { fg = "#82aaff" })
+hl("@tag.html", { link = "@tag" })
+hl("@tag_name", { fg = "#82aaff" })
+hl("@tag_name.html", { link = "@tag" })
+
+hl("@attribute", { fg = "#c792ea" })
+hl("@attribute_name", { fg = "#c792ea" })
+hl("@attribute_name.html", { link = "@attribute" })
+hl("@tag.attribute", { fg = "#c792ea" })
+hl("@tag.attribute.html", { link = "@tag.attribute" })
+
+hl("@string", { fg = "#c3e88d" })
+hl("@attribute_value", { fg = "#c3e88d" })
+hl("@attribute_value.html", { link = "@attribute_value" })
+
+hl("@text", { fg = "#d0d0d0" })
+hl("@text.html", { link = "@text" })
+
 hl("@punctuation.bracket", { fg = c.bracket })
 hl("@punctuation.delimiter", { fg = c.bracket })
 hl("@punctuation.special", { fg = c.bracket })
