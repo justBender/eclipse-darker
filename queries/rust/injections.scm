@@ -1,4 +1,44 @@
 
+; Yew html! -> HTML
+(
+  (macro_invocation
+    macro: (identifier) @macro_name
+    (token_tree) @injection.content)
+  (#eq? @macro_name "html")
+  (#set! injection.language "html")
+  (#set! injection.include-children)
+)
+
+(
+  (macro_invocation
+    macro: (scoped_identifier
+      name: (identifier) @macro_name)
+    (token_tree) @injection.content)
+  (#eq? @macro_name "html")
+  (#set! injection.language "html")
+  (#set! injection.include-children)
+)
+
+; Keep generic macro fallback after Yew
+(
+  (macro_invocation
+    macro: (identifier) @macro_name
+    (token_tree) @injection.content)
+  (#not-any-of? @macro_name "html" "json" "xml" "slint")
+  (#set! injection.language "rust")
+  (#set! injection.include-children)
+)
+
+(
+  (macro_invocation
+    macro: (scoped_identifier
+      name: (_) @macro_name)
+    (token_tree) @injection.content)
+  (#not-any-of? @macro_name "html" "json" "xml" "slint")
+  (#set! injection.language "rust")
+  (#set! injection.include-children)
+)
+
 (macro_invocation
   macro: (identifier) @macro_name
   (token_tree) @injection.content
